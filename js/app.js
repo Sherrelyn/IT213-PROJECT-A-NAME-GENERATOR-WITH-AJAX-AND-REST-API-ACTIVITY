@@ -2,42 +2,25 @@ document.querySelector('#generate-names').addEventListener('submit', loadNames);
 
 
 
-
-
-//Execute the function to query the API 
+// Execute a function to query API
 function loadNames(e) {
-    e.preventDefault();
+     e.preventDefault();
 
 
-    //Read the values from the form and create a variables 
-    const origin = document.getElementById('country').value;
-    const genre = document.getElementById('genre').value;
-    const amount = document.getElementById('quantity').value;
+     //Read the values from the form and create the variables
+     const origin = document.getElementById('country').values;
+     const genre = document.getElementById('genre').value;
+     const amount = document.getElementById('quantity').value;
 
-    //Build the URL
-    let url = 'http://uinames.com/api/?';
-    //Read the origin and append to the URL
-    if(origin !== ''){
-        url += `?region=${origin}&`;
-
-    }
-
-    //Read the genre and append to the URL
-    if(genre !== ''){
-        url += `?gender=${genre}&`;
-
-    }
-    
-     //Read the amount and append to the URL
-    if(amount !== ''){
-      url += `?amount=${amount}&`;
-    
-
-
-    }
-
-    console.log(url);
+     //Build a url
+     let url = 'https://uinames.com/api/?';
+     // Read the orgin  and append the url
+     if(origin !== '') {
+         url += 'region=${origin}&';
+     }
+ }
 
 
 
-}
+
+
