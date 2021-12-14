@@ -1,50 +1,56 @@
 document.querySelector('#generate-names').addEventListener('submit', loadNames);
 
 
-
-// Execute a function to query API
+// Execute the function to query the API
 function loadNames(e) {
-     e.preventDefault();
+    e.preventDefault();
 
 
-     //Read the values from the form and create the variables
-     const origin = document.getElementById('country').values;
-     const genre = document.getElementById('genre').value;
-     const amount = document.getElementById('quantity').value;
+    //Read the values from the form and create the variables
+    const origin = document.getElementById('country').value;
+    const genre = document.getElementById('genre').value;
+    const amount = document.getElementById('quantity').value;
 
-     //Build a url
-     let url = 'https://uinames.com/api/?';
-     // Read the orgin  and append the url
-     if(origin !== '') {
-         url += 'region=${origin}&';
-     }
-          // Read the genre and append the url
-          if(genre !== '') {
-            url += 'gender=${genre}&';
-        }
-             // Read the amount  and append the url
-     if(amount !== '') {
-        url += 'amount=${amount}&';
+
+
+    //Build the URL
+    let url ='https://randomuser.me/api/?';
+    //Read the Origin and Append to the URL
+    if(origin !== '') {
+        url += `region=${origin}&`;
     }
 
-    // Ajax call
-    const xhr = new XMLHttpRequest();
-
-    //Open the connection
-    xhr.open('GET', url, true);
-
-    //Execute the function
-    xhr.onload = function() {
-        if(this.status === 200) {
-            const names = JSON.parse(this.responseText);
-        }
+        //Read the Genre and Append to the URL
+    if(genre !== '') {
+        url += `gender=${genre}&`;
+    }
+    //Read the Amount and Append to the URL
+    if(amount !== '') {
+        url += `results=${amount}&`;
     }
 
+    
+    //Get API
+   fetch(url)
+   .then(res => res.json())
+   .then(data => {
+        // console.log(data);
 
-    //Send the request
-    xhr.send();
- }
+        let names = data.results;
+        
+        // Insert into the HTML
+        let html = "<h2><center>Generated Names</center></h2>"
+        html += '<ul class="list">';
+        names.forEach(function(name) {
+            html += `
+                <li>${name.name.first}</li>
+            `;     
+        })
+        html += '</ul>';
 
+        document.querySelector('#result').innerHTML = html;
+   });
+}
 
 
 
